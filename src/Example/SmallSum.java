@@ -1,15 +1,13 @@
 package Example;
 
 /*
-小和问题：
-在一个数组中，每一个数左边比当前数小的数累加起来的和叫做小和
-eg. [1,3,4,2,5] 小和为1 + 1+3 + 1 + 1+3+4+2=16
+ * 小和问题：
+ * 在一个数组中，每一个数左边比当前数小的数累加起来的和叫做小和
+ * eg. [1,3,4,2,5] 小和为1 + 1+3 + 1 + 1+3+4+2=16
  */
 public class SmallSum {
     /**
      * 由归排改进而来
-     * @param arr
-     * @return
      */
     public static int smallSum(int[] arr){
         if(arr == null || arr.length < 2){

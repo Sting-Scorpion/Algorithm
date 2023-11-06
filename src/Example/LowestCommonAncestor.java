@@ -4,8 +4,8 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 /*
-给定一棵树的根节点和两个包含在树内的节点
-返回这两个节点的最低公共祖先节点
+ * 给定一棵树的根节点和两个包含在树内的节点
+ * 返回这两个节点的最低公共祖先节点
  */
 public class LowestCommonAncestor {
     /**
