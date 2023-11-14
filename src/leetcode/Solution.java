@@ -406,35 +406,6 @@ public class Solution {
     }
 
     /**
-     * 单链表 L 表示为：
-     * L0 → L1 → … → Ln - 1 → Ln
-     * 请将其重新排列后变为：
-     * L0 → Ln → L1 → Ln - 1 → L2 → Ln - 2 → …
-     * @param head 单链表头节点
-     */
-    public void reorderList(ListNode head) {
-        if(head.next == null || head.next.next == null) return;
-        Stack<ListNode> tmp = new Stack<>();
-        ListNode t = head;
-        while(t != null){
-            tmp.push(t);
-            t = t.next;
-        }
-        t = head;
-        ListNode insert;
-        while(tmp.peek() != t){
-            insert = tmp.pop();
-            insert.next = t.next;
-            t.next = insert;
-            t = insert.next;
-            if(t.next == t){
-                break;
-            }
-        }
-        t.next = null;
-    }
-
-    /**
      * 计算并返回可以凑成总金额所需的 最少的硬币个数 。如果没有任何一种硬币组合能组成总金额，返回-1 。
      * 你可以认为每种硬币的数量是无限的。
      * @param coins 表示不同面额的硬币
@@ -456,55 +427,6 @@ public class Solution {
         return dp[amount] > amount ? -1 : dp[amount];
     }
 
-    int i1 = 0;//字符串下标
-    /**
-     * 给定一个经过编码的字符串，返回它解码后的字符串。
-     * 编码规则为: k[encoded_string]，表示其中方括号内部的 encoded_string 正好重复 k 次。注意 k 保证为正整数。
-     * 你可以认为输入字符串总是有效的；输入字符串中没有额外的空格，且输入的方括号总是符合格式要求的。
-     * 此外，你可以认为原始数据不包含数字，所有的数字只表示重复的次数 k ，例如不会出现像3a或2[4]的输入。
-     * @param s 经过编码的字符串
-     * @return 解码后的字符串
-     */
-    public String decodeString(String s) {
-        //编译思想
-        StringBuilder result = new StringBuilder();
-        /*
-        S -> N[S]S
-           | CS
-           | Epsilon
-        N -> 1 | 2 | 3 | 4 | ...
-        C -> a | b | c | d | ...
-        */
-
-        // S -> Epsilon
-        if(s.length() == i || s.charAt(i) == ']'){
-            return "";
-        }
-
-        // S -> N[S]S
-        else if(s.charAt(i) >= '0' && s.charAt(i) <= '9'){
-            int times = 0;
-            while(s.charAt(i) >= '0' && s.charAt(i) <= '9'){
-                times = times * 10 + (s.charAt(i) - '0');
-                i++;
-            }
-            i++;//过滤[
-            String re = decodeString(s);
-            while(times-- > 0){
-                result.append(re);
-            }
-            i++;//过滤]
-            result.append(decodeString(s));
-        }
-
-        // S -> CS
-        else{
-            result.append(s.charAt(i++));
-            result.append(decodeString(s));
-        }
-        return result.toString();
-    }
-
     /**
      * 二叉树的中序遍历 。
      * @param root 二叉树的根节点
@@ -521,44 +443,6 @@ public class Solution {
             TreeNode tar = tmp.pop();
             result.add(tar.val);
             root = tar.right;
-        }
-        return result;
-    }
-
-    /**
-     * 请按照顺时针螺旋顺序 ，返回矩阵中的所有元素。
-     * @param matrix m行n列的矩阵
-     * @return
-     */
-    public List<Integer> spiralOrder(int[][] matrix) {
-        List<Integer> result = new ArrayList<>();
-        int n = matrix.length;
-        int m = matrix[1].length;
-        int[][] move = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
-        int direction = 0;
-        int a = 0, b = -1;
-        while(!(m == 0 || n == 0)){
-            int step = 0;
-            if(direction %2 == 0){
-                while(step < m){
-                    a += move[direction][0];
-                    b += move[direction][1];
-                    result.add(matrix[a][b]);
-                    step++;
-                }
-                direction = (direction + 1) % 4;
-                n--;
-            }
-            else{
-                while(step < n){
-                    a += move[direction][0];
-                    b += move[direction][1];
-                    result.add(matrix[a][b]);
-                    step++;
-                }
-                direction = (direction + 1) % 4;
-                m--;
-            }
         }
         return result;
     }
@@ -622,15 +506,10 @@ public class Solution {
         System.out.println(b.isValid(s));
         int[][] re = {{0,1,1,0},{1,1,1,2},{1,5,1,1}};
         b.setZeroes(re);
-        ListNode a4 = new ListNode(4);
-        ListNode a3 = new ListNode(3, a4);
-        ListNode a2 = new ListNode(2, a3);
-        ListNode a1 = new ListNode(1, a2);
-        b.reorderList(a1);
+
         int[] coin = {1,2,5};
         System.out.println(b.coinChange(coin, 50));
-        String s = "3[a2[c]]";
-        System.out.println(b.decodeString(s));
+
         TreeNode root = new TreeNode(1,null, new TreeNode(2,new TreeNode(3),null));
         System.out.println(b.inorderTraversal(root));
 
