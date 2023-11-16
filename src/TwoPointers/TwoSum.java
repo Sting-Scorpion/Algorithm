@@ -2,6 +2,7 @@ package TwoPointers;
 
 import java.util.Arrays;
 
+/* Leetcode 167 */
 public class TwoSum {
     /**
      * 从数组中找出满足相加之和等于目标数 target 的两个数
@@ -10,18 +11,18 @@ public class TwoSum {
      * @return 以长度为 2 的整数数组 [index1, index2] 的形式返回这两个整数的下标
      */
     public static int[] twoSum(int[] numbers, int target) {
-        int i = 0;
-        int j = numbers.length - 1;
-        while(i < j){
-            int sum = numbers[i] + numbers[j];
+        int left = 0;
+        int right = numbers.length - 1;
+        while(left < right){
+            int sum = numbers[left] + numbers[right];
             if(sum < target){
-                i++;
+                left++;
             }
             else if(sum > target){
-                j--;
+                right--;
             }
             else{
-                return new int[] {i + 1, j + 1};
+                return new int[] {left + 1, right + 1};
             }
         }
         return new int[] {-1, -1};
