@@ -1,10 +1,10 @@
 package DynamicProgramming;
 
-import javax.print.attribute.IntegerSyntax;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/* Leetcode 120 */
 public class MinimumTotal {
     /**
      * 每一步只能移动到下一行中相邻的结点上。
@@ -47,12 +47,14 @@ public class MinimumTotal {
         triangle.add(layer3);
         triangle.add(layer4);
         /*
-           2
-          3 4
-         6 5 7
-        4 1 8 3
+         * 分析：
+         *      2
+         *     3 4
+         *    6 5 7
+         *   4 1 8 3
+         * 选择：2 -> 3 -> 5 -> 1
+         * sum = 11
          */
-
         System.out.println("自顶向下最小路径和：" + minimumTotal(triangle));
     }
 }
