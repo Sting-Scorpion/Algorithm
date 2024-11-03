@@ -1,24 +1,35 @@
 package Graph;
 
+import Graph.structure.Edge;
+import Graph.structure.Graph;
+import Graph.structure.Node;
+
 public class GraphGenerator {
-    //matrix为N * 3的矩阵
-    //matrix[i]的三个元素，分别为出点，入点，边的权重
-    public static Graph createGraph(Integer[][] matrix){
+    /**
+     * 把边的数组转化为图的结构（有向图）
+     * @param edges N * 3的矩阵，每行的三个元素分别为出点，入点，边的权重
+     * @return 图的结构
+     */
+    public static Graph createGraph(int[][] edges){
         Graph graph = new Graph();
-        for(int i = 0; i < matrix.length; i++){
-            Integer from = matrix[i][0];
-            Integer to = matrix[i][1];
-            Integer weight = matrix[i][2];
-            //点若不存在，则新建
-            if(!graph.nodes.containsKey(from)){
+        // 拿到每一条边
+        for (int[] edge : edges) {
+            int from = edge[0];
+            int to = edge[1];
+            int weight = edge[2];
+            // 点若不存在，则新建
+            if (!graph.nodes.containsKey(from)) {
                 graph.nodes.put(from, new Node(from));
             }
-            if(!graph.nodes.containsKey(to)){
+            Node fromNode = graph.nodes.get(from);
+
+            if (!graph.nodes.containsKey(to)) {
                 graph.nodes.put(to, new Node(to));
             }
-            Node fromNode = graph.nodes.get(from);
             Node toNode = graph.nodes.get(to);
+            // 把这条边创建出来
             Edge newEdge = new Edge(weight, fromNode, toNode);
+
             fromNode.nexts.add(toNode);
             fromNode.out++;
             toNode.in++;
