@@ -16,29 +16,29 @@ public class Dijkstra {
      * @return 从head出发到所有点的最小距离，若不存在某点说明无法到达
      */
     public static Map<Node, Integer> dijkstra(Node head){
-        HashMap<Node, Integer> distanceMap = new HashMap<>();
-        distanceMap.put(head, 0);
+        HashMap<Node, Integer> re = new HashMap<>();
+        re.put(head, 0);
 
         HashSet<Node> selectedNodes = new HashSet<>(); // 已经跳转过的点
-        Node minNode = getMinDistanceAndUnselectedNode(distanceMap, selectedNodes); // 跳转点
+        Node minNode = getMinDistanceAndUnselectedNode(re, selectedNodes); // 跳转点
         while(minNode != null){
-            int distance = distanceMap.get(minNode); // 起始点到跳转点的距离（已有距离）
+            int distance = re.get(minNode); // 起始点到跳转点的距离（已有距离）
             // 更新起始点到和跳转点直接相连的点的距离
             for(Edge edge : minNode.edges){
                 Node toNode = edge.to;
                 // 原先没和起始点连接的点
-                if(!distanceMap.containsKey(toNode)){
-                    distanceMap.put(toNode, distance + edge.weight); // 和起始点连上了，加入 map 中
+                if(!re.containsKey(toNode)){
+                    re.put(toNode, distance + edge.weight); // 和起始点连上了，加入 map 中
                 }
                 // 已经能和起始点连上的点
                 else{
-                    distanceMap.put(toNode, Math.min(distanceMap.get(toNode), distance + edge.weight)); // 更新最小距离（若有）
+                    re.put(toNode, Math.min(re.get(toNode), distance + edge.weight)); // 更新最小距离（若有）
                 }
             }
             selectedNodes.add(minNode); // 放入跳转完的集合中
-            minNode = getMinDistanceAndUnselectedNode(distanceMap, selectedNodes); // 拿到下一个跳转点
+            minNode = getMinDistanceAndUnselectedNode(re, selectedNodes); // 拿到下一个跳转点
         }
-        return distanceMap;
+        return re;
     }
 
     /**
@@ -71,7 +71,7 @@ public class Dijkstra {
         Graph graph = GraphGenerator.createGraph(matrix);
         // 从节点1开始
         Node head = graph.nodes.get(1);
-        Map<Node, Integer> distances = reinforcedDijkstra(head, 7);
+        Map<Node, Integer> distances = reinforcedDijkstra(head, graph.nodes.size());
 //        for(Node node : distances.keySet()){
 //            System.out.print(node.value + ": " + distances.get(node) + ", ");
 //        }
@@ -84,7 +84,7 @@ public class Dijkstra {
         }
         Arrays.sort(distance, (a, b) -> (a[0] - b[0]));
         for(int[] kv : distance){
-            System.out.print(kv[0] + ": " + kv[1] + ", ");
+            System.out.println(kv[0] + ": " + kv[1]);
         }
     }
 
