@@ -1,5 +1,6 @@
 package DynamicProgramming;
 
+/* Leetcode 509 */
 public class Fibonacci {
     /**
      * 求斐波那契数
@@ -23,6 +24,10 @@ public class Fibonacci {
 
     public static void main(String[] args) {
         int n = 6;
+        /*
+         * 分析：
+         * {0, 1, 1, 2, 3, 5, 8}
+         */
         System.out.println(fib(n));
     }
 }
