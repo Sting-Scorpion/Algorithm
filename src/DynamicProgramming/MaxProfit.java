@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 public class MaxProfit {
     /**
+     * Leetcode 121
      * 你只能选择某一天买入这只股票，并选择在未来的某一个不同的日子卖出该股票。
      * @param prices prices[i] 表示一支给定股票第 i 天的价格
      * @return 返回你可以从这笔交易中获取的最大利润
@@ -27,7 +28,8 @@ public class MaxProfit {
     }
 
     /**
-     * 在每一天，你可以决定是否购买和/或出售股票。你在任何时候 最多 只能持有 一股 股票。你也可以先购买，然后在 同一天 出售。
+     * Leetcode 122
+     * 在每一天，你可以决定是否购买和/或出售股票。你在任何时候最多只能持有一股股票。你也可以先购买，然后在同一天出售。
      * @param prices prices[i] 表示一支给定股票第 i 天的价格
      * @return 返回你可以从这笔交易中获取的最大利润
      */
@@ -45,6 +47,7 @@ public class MaxProfit {
     }
 
     /**
+     * Leetcode 123
      * 你最多可以完成两笔交易。
      * 注意：你不能同时参与多笔交易（你必须在再次购买前出售掉之前的股票）。
      * @param prices prices[i] 表示一支给定股票第 i 天的价格
